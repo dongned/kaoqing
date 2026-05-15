@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>加班计算器 | macOS 桌面工具</title>
+    <meta
+      name="description"
+      content="一个面向内部考勤场景的桌面工具，支持一键拉取考勤、自动核算加班，并通过 GitHub Releases 分发 macOS APP。"
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="bg bg-amber"></div>
+    <div class="bg bg-teal"></div>
+
+    <header class="topbar">
+      <a class="brand" href="https://github.com/dongned/kaoqing">kaoqing</a>
+      <nav class="nav">
+        <a href="https://github.com/dongned/kaoqing">源码仓库</a>
+        <a href="https://github.com/dongned/kaoqing/releases">Releases</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">macOS APP RELEASE PAGE</p>
+          <h1>把考勤拉取、加班核算和月度汇总，收进一个轻量桌面工具。</h1>
+          <p class="lead">
+            加班计算器基于 PyQt6 构建，适合内部发版、直接交付给员工使用。
+            下载后打开应用，输入账号密码，即可拉取当月考勤并自动计算加班时长。
+          </p>
+          <div class="actions">
+            <a class="button button-primary" href="https://github.com/dongned/kaoqing/releases/latest">
+              下载最新版本
+            </a>
+            <a class="button button-secondary" href="https://github.com/dongned/kaoqing">
+              查看源码
+            </a>
+          </div>
+          <div class="chips">
+            <span>PyQt6</span>
+            <span>GitHub Releases</span>
+            <span>macOS Desktop</span>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="window">
+            <div class="window-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="window-body">
+              <div class="login-card">
+                <div class="field">
+                  <label>账号</label>
+                  <div class="field-box">EMP001234</div>
+                </div>
+                <div class="field">
+                  <label>密码</label>
+                  <div class="field-box">••••••••••</div>
+                </div>
+                <div class="button-strip">
+                  <span class="mini-button">获取考勤</span>
+                </div>
+              </div>
+              <div class="result-card">
+                <p>日期&nbsp;&nbsp;班次&nbsp;&nbsp;上班&nbsp;&nbsp;下班&nbsp;&nbsp;加班</p>
+                <p>05-06&nbsp;&nbsp;工作日&nbsp;&nbsp;08:34&nbsp;&nbsp;20:17&nbsp;&nbsp;2.5h</p>
+                <p>05-11&nbsp;&nbsp;休息日&nbsp;&nbsp;09:10&nbsp;&nbsp;18:40&nbsp;&nbsp;7.5h</p>
+                <p>05-12&nbsp;&nbsp;工作日&nbsp;&nbsp;08:28&nbsp;&nbsp;21:03&nbsp;&nbsp;3.0h</p>
+                <p class="total">本月累计：13.0h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-grid">
+        <article class="card">
+          <p class="card-tag">01</p>
+          <h2>一键拉取考勤</h2>
+          <p>对接现有考勤接口，桌面端直接登录，不需要额外打开浏览器逐条查记录。</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">02</p>
+          <h2>自动核算加班</h2>
+          <p>覆盖工作日、休息日、跨天记录和休息时段扣减，结果按半小时向下取整。</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">03</p>
+          <h2>适合内部发版</h2>
+          <p>代码体量小，打包路径直接，可通过 GitHub Releases 或企业网盘分发 `.app`。</p>
+        </article>
+      </section>
+
+      <section class="release-strip">
+        <div class="release-copy">
+          <p class="eyebrow">RELEASE FLOW</p>
+          <h2>从仓库到 APP 发布，流程保持简单。</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <strong>01</strong>
+            <p>执行 `scripts/build_macos.sh`，产出 `dist/加班计算器.app`。</p>
+          </div>
+          <div class="step">
+            <strong>02</strong>
+            <p>将 `.app` 或压缩包上传到 GitHub Releases。</p>
+          </div>
+          <div class="step">
+            <strong>03</strong>
+            <p>启用 `docs/` 目录为 GitHub Pages，对外展示下载入口。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-grid">
+        <article class="info-card">
+          <p class="eyebrow">使用方式</p>
+          <h2>3 步上手</h2>
+          <ol>
+            <li>下载并打开 APP</li>
+            <li>输入员工账号与密码</li>
+            <li>点击“获取考勤”查看当月加班汇总</li>
+          </ol>
+        </article>
+        <article class="info-card">
+          <p class="eyebrow">发布提示</p>
+          <h2>上线前检查</h2>
+          <ol>
+            <li>替换正式的广告位地址</li>
+            <li>确认使用期限和发版说明</li>
+            <li>验证最新 Release 下载是否可用</li>
+          </ol>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
