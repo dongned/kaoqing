@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dong's Tools - 实用效率工具</title>
+    <meta name="description" content="免费实用的效率工具，包括加班计算器、考勤分析等，帮助你轻松管理工作时间。">
+    <meta name="keywords" content="加班计算器, 考勤工具, 工时统计, 效率工具, 免费工具">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+        /* 顶部广告横幅 */
+        .ad-top {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 30px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header { text-align: center; margin-bottom: 50px; }
+        .logo {
+            width: 80px; height: 80px; border-radius: 20px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 36px;
+            box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+        }
+        h1 { color: #f1f5f9; font-size: 2.2em; margin-bottom: 8px; }
+        .tagline { color: #94a3b8; font-size: 1.1em; }
+
+        .section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        h2 { color: #60a5fa; margin-bottom: 16px; font-size: 1.5em; }
+        p { color: #cbd5e1; margin-bottom: 12px; }
+
+        /* 工具卡片 */
+        .tool-card {
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: transform 0.2s;
+        }
+        .tool-card:hover { transform: translateY(-2px); }
+        .tool-card h3 { color: #93c5fd; margin-bottom: 8px; font-size: 1.2em; }
+        .tool-card p { color: #94a3b8; margin-bottom: 12px; }
+        .tool-tag {
+            display: inline-block;
+            background: rgba(139,92,246,0.2);
+            color: #c4b5fd;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 6px;
+        }
+
+        /* 使用说明 */
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li {
+            counter-increment: step;
+            padding: 12px 0 12px 50px;
+            position: relative;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute; left: 0; top: 12px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: #fff; text-align: center; line-height: 32px;
+            font-size: 0.9em; font-weight: bold;
+        }
+
+        /* FAQ */
+        .faq-item { margin-bottom: 16px; }
+        .faq-item h4 { color: #93c5fd; margin-bottom: 6px; }
+        .faq-item p { color: #94a3b8; font-size: 0.95em; }
+
+        /* 中间广告 */
+        .ad-mid {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 24px 0;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            text-align: center; color: #475569;
+            margin-top: 40px; padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.9em;
+        }
+
+        /* 底部广告 */
+        .ad-bottom {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 24px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 顶部横幅广告 -->
+        <div class="ad-top">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2011248514688603"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <header>
+            <div class="logo">🛠</div>
+            <h1>Dong's Tools</h1>
+            <p class="tagline">简单好用的免费效率工具</p>
+        </header>
+
+        <!-- 关于 -->
+        <section class="section">
+            <h2>关于本站</h2>
+            <p>这里分享我自己开发的小工具，都是日常工作中的实际需求驱动，免费开放给所有人使用。每个工具都经过实际测试，确保计算准确、使用简单。</p>
+            <p>如果你觉得这些工具有用，欢迎分享给身边的朋友！</p>
+        </section>
+
+        <!-- 工具列表 -->
+        <section class="section">
+            <h2>工具列表</h2>
+            <div class="tool-card">
+                <h3>加班计算器</h3>
+                <p>自动获取考勤系统数据，智能计算当月加班时长。支持工作日加班和休息日加班两种模式，自动扣除午休和晚餐时间，精确到半小时。</p>
+                <span class="tool-tag">macOS</span>
+                <span class="tool-tag">免费</span>
+                <span class="tool-tag">考勤</span>
+                <span class="tool-tag">加班统计</span>
+            </div>
+        </section>
+
+        <!-- 中间广告位（大矩形） -->
+        <div class="ad-mid">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2011248514688603"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- 使用教程 -->
+        <section class="section">
+            <h2>加班计算器使用教程</h2>
+            <ol class="step-list">
+                <li>下载并打开加班计算器（支持 macOS）</li>
+                <li>输入你的考勤系统账号和密码</li>
+                <li>勾选"记住密码"可以下次自动填充</li>
+                <li>点击"获取考勤"按钮</li>
+                <li>等待几秒，即可看到当月每天的加班时长和总计</li>
+            </ol>
+        </section>
+
+        <!-- 计算规则说明 -->
+        <section class="section">
+            <h2>加班计算规则</h2>
+            <p><strong style="color:#93c5fd">工作日加班：</strong>以下班标准时间之后开始计算，扣除 17:30-18:30 的晚餐时间，最长不超过 12 小时，向下取整到半小时。</p>
+            <p><strong style="color:#93c5fd">休息日加班：</strong>按实际上班到下班的全时长计算，扣除 12:00-13:00 午休和 17:30-18:30 晚餐时间，向下取整到半小时。</p>
+            <p><strong style="color:#93c5fd">跨天情况：</strong>如果下班时间早于上班时间（如夜班），自动按跨天计算。</p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h4>Q: 数据安全吗？</h4>
+                <p>A: 密码仅保存在你本地电脑上，使用 Base64 编码存储，不会上传到任何服务器。考勤数据直接从官方系统获取，不经过第三方。</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q: 加班时长和公司系统不一致？</h4>
+                <p>A: 本工具按通用规则计算，可能与你们公司的具体政策有差异，结果仅供参考。如有疑问以公司 HR 系统为准。</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q: 支持 Windows 吗？</h4>
+                <p>A: 目前仅支持 macOS，Windows 版本计划中。</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q: 应用提示过期怎么办？</h4>
+                <p>A: 请回到本站下载最新版本。</p>
+            </div>
+        </section>
+
+        <!-- 底部广告 -->
+        <div class="ad-bottom">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2011248514688603"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Dong's Tools. Built with &#10084; and hosted on GitHub Pages. | <a href="privacy.html" style="color:#60a5fa;">隐私政策</a></p>
+        </footer>
+    </div>
+
+    <!-- AdSense 全局脚本（只需加载一次） -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2011248514688603" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+python3 -m PyInstaller \
+  --windowed \
+  --name "加班计算器" \
+  --clean \
+  --noconfirm \
+  --hidden-import=PyQt6.QtCore \
+  --hidden-import=PyQt6.QtGui \
+  --hidden-import=PyQt6.QtWidgets \
+  --hidden-import=PyQt6.QtWebEngineWidgets \
+  --hidden-import=PyQt6.QtWebEngineCore \
+  --hidden-import=PyQt6.QtWebChannel \
+  --collect-data PyQt6.QtWebEngineWidgets \
+  --collect-data PyQt6.QtWebEngineCore \
+  --icon /Users/dongshiling/project/luxshare-/ICT/azwm0-ubi0j.icns /Users/dongshiling/project/luxshare-/ICT/test.py
