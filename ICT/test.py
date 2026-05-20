@@ -131,14 +131,18 @@ def calculate_overtime(record: dict) -> float:
 
 
 # ========= 广告配置 ==========
-# 替换为你自己的广告页面 URL，服务器上放一个 HTML 页面，嵌入 AdSense 或其他广告代码
-AD_URL = "https://your-server.com/ad-banner.html"
-# 广告加载失败时显示的本地备用 HTML
+# 桌面应用不嵌入 AdSense，横幅仅用于展示站内推广内容。
+AD_URL = "https://dongned.github.io/ad.html"
+# 横幅加载失败时显示的本地备用 HTML
 AD_FALLBACK_HTML = """
 <html><body style="margin:0;padding:0;display:flex;align-items:center;justify-content:center;
-height:100%;background:#f5f5f5;font-family:sans-serif;color:#999;font-size:13px;">
-广告加载中...
-</body></html>
+height:100%;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#475569;font-size:13px;">
+<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:space-between;
+padding:14px 18px;border:1px solid #dbeafe;background:linear-gradient(135deg,#eff6ff,#f8fafc 62%,#ecfdf5);">
+<div><strong style="display:block;color:#1d4ed8;font-size:16px;margin-bottom:4px;">Dong's Tools</strong>
+<span>获取加班计算器最新版本、使用说明和计算规则</span></div>
+<span style="padding:8px 12px;border-radius:6px;color:#fff;background:#2563eb;font-weight:600;">打开官网</span>
+</div></body></html>
 """
 
 # ========= GUI ==========
@@ -171,7 +175,8 @@ class AttendanceApp(QtWidgets.QWidget):
         # ===== 广告横幅 =====
         self.ad_view = QWebEngineView()
         self.ad_view.setFixedHeight(90)
-        self.ad_view.setHtml(AD_FALLBACK_HTML)
+        self.ad_view.loadFinished.connect(self.handle_ad_load_finished)
+        self.ad_view.setHtml(AD_FALLBACK_HTML, QUrl("https://dongned.github.io/"))
         self.ad_view.load(QUrl(AD_URL))
         layout.addWidget(self.ad_view)
 
@@ -185,6 +190,10 @@ class AttendanceApp(QtWidgets.QWidget):
         os.makedirs(os.path.dirname(self.cred_path), exist_ok=True)
 
         self.load_credentials()
+
+    def handle_ad_load_finished(self, ok: bool):
+        if not ok:
+            self.ad_view.setHtml(AD_FALLBACK_HTML, QUrl("https://dongned.github.io/"))
 
     def load_credentials(self):
         if os.path.exists(self.cred_path):
