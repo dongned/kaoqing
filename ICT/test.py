@@ -47,6 +47,14 @@ def deduct_full_breaks(start: datetime, end: datetime, breaks) -> float:
             deduction += hours_between(break_start, break_end)
     return deduction
 
+def deduct_completed_breaks(start: datetime, end: datetime, breaks) -> float:
+    """Return breaks fully contained within an attendance interval."""
+    deduction = 0.0
+    for break_start, break_end in breaks:
+        if start <= break_start and end >= break_end:
+            deduction += hours_between(break_start, break_end)
+    return deduction
+
 def floor_half_hour(hours: float) -> float:
     return int(hours / 0.5) * 0.5
 
@@ -92,7 +100,7 @@ def calculate_overtime(record: dict) -> float:
     if is_offday:
         overtime = hours_between(beg_t, end_t)
 
-        overtime -= deduct_full_breaks(beg_t, end_t, [
+        overtime -= deduct_completed_breaks(beg_t, end_t, [
             (parse_time_safe("12:00"), parse_time_safe("13:00")),
             (parse_time_safe("17:30"), parse_time_safe("18:30")),
         ])
