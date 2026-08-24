@@ -37,10 +37,15 @@ def parse_time_safe(t: str):
 def hours_between(start: datetime, end: datetime) -> float:
     return max((end - start).total_seconds() / 3600.0, 0.0)
 
-def calc_overlap(start, end, b_start, b_end) -> float:
-    latest = max(start, b_start)
-    earliest = min(end, b_end)
-    return max((earliest - latest).total_seconds() / 3600.0, 0.0)
+def deduct_full_breaks(start: datetime, end: datetime, breaks) -> float:
+    """Return the fixed meal-break time covered by an attendance interval."""
+    deduction = 0.0
+    for break_start, break_end in breaks:
+        # Meal breaks are deducted as complete one-hour periods once the
+        # attendance interval reaches any part of the break.
+        if start < break_end and end > break_start:
+            deduction += hours_between(break_start, break_end)
+    return deduction
 
 def floor_half_hour(hours: float) -> float:
     return int(hours / 0.5) * 0.5
@@ -87,14 +92,10 @@ def calculate_overtime(record: dict) -> float:
     if is_offday:
         overtime = hours_between(beg_t, end_t)
 
-        overtime -= calc_overlap(
-            beg_t, end_t,
-            parse_time_safe("12:00"), parse_time_safe("13:00")
-        )
-        overtime -= calc_overlap(
-            beg_t, end_t,
-            parse_time_safe("17:30"), parse_time_safe("18:30")
-        )
+        overtime -= deduct_full_breaks(beg_t, end_t, [
+            (parse_time_safe("12:00"), parse_time_safe("13:00")),
+            (parse_time_safe("17:30"), parse_time_safe("18:30")),
+        ])
 
         return floor_half_hour(max(overtime, 0.0))
 
@@ -111,11 +112,9 @@ def calculate_overtime(record: dict) -> float:
         return 0.0
 
     overtime = hours_between(std_end, end_t)
-
-    overtime -= calc_overlap(
-        std_end, end_t,
-        parse_time_safe("17:30"), parse_time_safe("18:30")
-    )
+    overtime -= deduct_full_breaks(std_end, end_t, [
+        (parse_time_safe("17:30"), parse_time_safe("18:30")),
+    ])
 
     # 防异常
     overtime = min(overtime, 12)
